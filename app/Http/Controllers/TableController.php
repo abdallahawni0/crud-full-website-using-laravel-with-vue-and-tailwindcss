@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Table\TableIndexRequest;
+use App\Http\Requests\Table\TableShowRequest;
 use App\Http\Requests\Table\TableStoreRequest;
 use App\Models\Table;
 use Illuminate\Http\Request;
@@ -38,9 +39,9 @@ class TableController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Table $table)
+    public function show(TableShowRequest $request , Table $table)
     {
-
+        return Inertia::render('Table/Show' , ['table' => $table]);
     }
 
     /**

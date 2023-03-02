@@ -1,4 +1,6 @@
 <script setup>
+import {Link} from "@inertiajs/vue3";
+
 const props = defineProps(['tables'])
 
 </script>
@@ -43,7 +45,7 @@ const props = defineProps(['tables'])
                     {{table.details}}
                 </td>
                 <td class="px-6 py-4 text-center">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Show</a>
+                    <Link :href="route('table.show' , table.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Show</Link>
                 </td>
             </tr>
             </tbody>
