@@ -1,72 +1,53 @@
 <script setup>
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { useForm } from '@inertiajs/vue3';
-
-const form = useForm({
-    title: '',
-    details: '',
-});
-
-const createTable = () => {
-    form.post(route('table.store') , {
-        onSuccess:() => form.reset('title' , 'details'),
-    })
-};
+const props = defineProps(['tables'])
 
 </script>
 
 <template>
     <section>
         <header>
-            <h2 class="text-lg font-medium text-gray-900">Create Table</h2>
+            <h2 class="text-lg font-medium text-gray-900">Index Table</h2>
 
             <p class="mt-1 text-sm text-gray-600">
-                Create new data to be added to the table.
+                Show all data from the database.
             </p>
         </header>
 
-        <form @submit.prevent="createTable" class="mt-6 space-y-6">
-            <div>
-                <InputLabel for="title" value="Title" />
 
-                <TextInput
-                    id="title"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.title"
-                    required
-                    autofocus
-                    autocomplete="title"
-                />
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th class="px-6 py-3">
+                    #
+                </th>
+                <th class="px-6 py-3">
+                    Title
+                </th>
+                <th class="px-6 py-3">
+                    Details
+                </th>
+                <th class="px-6 py-3 text-center">
+                    Actions
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="table in tables" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{table.id}}
+                </th>
+                <td class="px-6 py-4">
+                    {{table.title}}
+                </td>
+                <td class="px-6 py-4">
+                    {{table.details}}
+                </td>
+                <td class="px-6 py-4 text-center">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Show</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
-                <InputError class="mt-2" :message="form.errors.title" />
-            </div>
-
-            <div>
-                <InputLabel for="details" value="Details" />
-
-                <TextInput
-                    id="details"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.details"
-                    required
-                    autocomplete="details"
-                />
-
-                <InputError class="mt-2" :message="form.errors.details" />
-            </div>
-
-            <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
-
-                <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">
-                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Saved.</p>
-                </Transition>
-            </div>
-        </form>
     </section>
 </template>

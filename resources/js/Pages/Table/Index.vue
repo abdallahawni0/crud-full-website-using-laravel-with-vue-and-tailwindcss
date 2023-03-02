@@ -3,11 +3,9 @@ import { Head } from '@inertiajs/vue3';
 
 import System from '@/Layouts/System.vue';
 import CreateTableForm from "@/Pages/Table/Partials/CreateTableForm.vue";
+import IndexTable from "@/Pages/Table/Partials/IndexTable.vue";
 
-defineProps({
-    mustVerifyEmail: Boolean,
-    status: String,
-});
+defineProps(['tables']);
 </script>
 
 <template>
@@ -22,15 +20,16 @@ defineProps({
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                     <CreateTableForm/>
                 </div>
 
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                    <IndexTable :tables="tables"/>
                 </div>
 
-                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                </div>
+
             </div>
         </div>
     </System>

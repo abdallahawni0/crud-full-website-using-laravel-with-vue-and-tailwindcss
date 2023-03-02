@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Table\TableIndexRequest;
 use App\Http\Requests\Table\TableStoreRequest;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Symfony\Component\HttpFoundation\Response;
+use Inertia\Response;
 
 class TableController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(TableIndexRequest $request): Response
     {
-        return Inertia::render('Table/Index');
+        return Inertia::render('Table/Index' , ['tables' => Table::all()]);
     }
 
     /**
