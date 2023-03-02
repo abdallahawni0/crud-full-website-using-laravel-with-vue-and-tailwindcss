@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Table\TableDeleteRequest;
 use App\Http\Requests\Table\TableIndexRequest;
 use App\Http\Requests\Table\TableShowRequest;
 use App\Http\Requests\Table\TableStoreRequest;
@@ -18,7 +19,7 @@ class TableController extends Controller
      */
     public function index(TableIndexRequest $request): Response
     {
-        return Inertia::render('Table/Index' , ['tables' => Table::all()]);
+        return Inertia::render('Table/Index' , ['tables' => Table::withTrashed()->get()]);
     }
 
     /**
@@ -64,8 +65,11 @@ class TableController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Table $table)
+    public function destroy(TableDeleteRequest $request , Table $table)
     {
-        //
+        if ($request->delete($table)){
+            return redirect()->route('table.index');
+        }
+        return redirect()->back();
     }
 }

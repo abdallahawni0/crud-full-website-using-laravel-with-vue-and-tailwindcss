@@ -42,5 +42,4 @@ class TableStoreRequest extends FormRequest
 
         return $table->save();
     }
-
 }

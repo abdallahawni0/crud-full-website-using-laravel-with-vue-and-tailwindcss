@@ -5,7 +5,7 @@ namespace App\Http\Requests\Table;
 use App\Models\Table;
 use Illuminate\Foundation\Http\FormRequest;
 
-class TableUpdateRequest extends FormRequest
+class TableDeleteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,21 +23,20 @@ class TableUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string',
-            'details' => 'required|string'
+            'type' => 'required|boolean'
         ];
     }
 
     /**
-     * Update this data.
+     * Delete new data.
      *
-     * @return boolean $isSaved
+     * @return boolean $isDeleted
      */
-    public function update(Table $table) :bool
+    public function delete(Table $table) :bool
     {
-        $table->title = $this->title;
-        $table->details = $this->details;
-
-        return $table->save();
+        if ($this->type){
+            return $table->forceDelete();
+        }
+        return $table->delete();
     }
 }

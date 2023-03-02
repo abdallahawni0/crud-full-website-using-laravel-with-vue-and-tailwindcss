@@ -3,7 +3,7 @@ import { Head } from '@inertiajs/vue3';
 
 import System from '@/Layouts/System.vue';
 import CreateTableForm from "@/Pages/Table/Partials/CreateTableForm.vue";
-import IndexTable from "@/Pages/Table/Partials/IndexTable.vue";
+import IndexTablesTable from "@/Pages/Table/Partials/IndexTablesTable.vue";
 
 defineProps(['tables']);
 </script>
@@ -26,7 +26,7 @@ defineProps(['tables']);
                 </div>
 
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                    <IndexTable :tables="tables"/>
+                    <IndexTablesTable :tables="tables"/>
                 </div>
 
 

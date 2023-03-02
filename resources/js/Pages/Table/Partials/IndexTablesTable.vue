@@ -28,6 +28,9 @@ const props = defineProps(['tables'])
                 <th class="px-6 py-3">
                     Details
                 </th>
+                <th class="px-6 py-3">
+                    Status
+                </th>
                 <th class="px-6 py-3 text-center">
                     Actions
                 </th>
@@ -43,6 +46,11 @@ const props = defineProps(['tables'])
                 </td>
                 <td class="px-6 py-4">
                     {{table.details}}
+                </td>
+                <td class="px-6 py-4" :class="{
+                    'text-red-600' : table.status === 'Deleted',
+                    'text-green-600' : table.status === 'Available'}">
+                    {{table.status}}
                 </td>
                 <td class="px-6 py-4 text-center">
                     <Link :href="route('table.show' , table.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Show</Link>

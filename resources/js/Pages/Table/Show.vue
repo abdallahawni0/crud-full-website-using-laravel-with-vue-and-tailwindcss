@@ -3,7 +3,7 @@ import { Head } from '@inertiajs/vue3';
 
 import System from '@/Layouts/System.vue';
 import UpdateTableForm from "@/Pages/Table/Partials/UpdateTableForm.vue";
-
+import DeleteTableForm from "@/Pages/Table/Partials/DeleteTableForm.vue";
 
 defineProps(['table']);
 </script>
@@ -26,8 +26,8 @@ defineProps(['table']);
                 </div>
 
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                    <DeleteTableForm :table="table"/>
                 </div>
-
 
             </div>
         </div>
