@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Table\TableIndexRequest;
 use App\Http\Requests\Table\TableShowRequest;
 use App\Http\Requests\Table\TableStoreRequest;
+use App\Http\Requests\Table\TableUpdateRequest;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -55,9 +56,9 @@ class TableController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Table $table)
+    public function update(TableUpdateRequest $request, Table $table)
     {
-        //
+        $request->update($table);
     }
 
     /**
